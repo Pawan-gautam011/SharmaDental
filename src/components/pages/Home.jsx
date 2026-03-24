@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import treatmentHeroImg from "../../assets/treatment-1.png";
+import banner from "../../assets/Smile-Banner.jpg";
 
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
@@ -846,7 +847,7 @@ export const Home = () => {
 <div className="flex justify-center mb-[-40px] relative z-[2]">
   <div className="absolute -bottom-24 left-4 w-[120px] sm:w-[150px]">
     <img
-      src="./src/assets/treatment-1.png"
+      src={treatmentHeroImg}
       alt="Treatment"
       className="w-full h-auto"
     />
@@ -1098,7 +1099,7 @@ export const Home = () => {
       <section
         ref={ctaRef}
         style={{
-          backgroundImage: "url('./src/assets/Smile-Banner.jpg')",
+          backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
