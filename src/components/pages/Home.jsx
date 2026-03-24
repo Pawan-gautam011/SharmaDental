@@ -846,7 +846,7 @@ export const Home = () => {
 <div className="flex justify-center mb-[-40px] relative z-[2]">
   <div className="absolute -bottom-24 left-4 w-[120px] sm:w-[150px]">
     <img
-      src="/src/assets/treatment-1.png"
+      src="./src/assets/treatment-1.png"
       alt="Treatment"
       className="w-full h-auto"
     />
@@ -1098,7 +1098,7 @@ export const Home = () => {
       <section
         ref={ctaRef}
         style={{
-          backgroundImage: "url('/src/assets/Smile-Banner.jpg')",
+          backgroundImage: "url('./src/assets/Smile-Banner.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",

@@ -62,62 +62,331 @@ const Services = () => {
     <div style={{ fontFamily: "'DM Sans','Nunito',sans-serif", overflowX: 'hidden' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
-        .fade-up{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease;}
-        .fade-up.visible{opacity:1;transform:translateY(0);}
-        .gradient-text{background:linear-gradient(135deg,#0ea5e9,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-        .pill-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);color:#10b981;border:1px solid rgba(16,185,129,0.25);border-radius:999px;padding:6px 16px;font-size:13px;font-weight:600;margin-bottom:20px;}
-        .cat-btn{padding:12px 24px;border-radius:999px;border:2px solid #e2e8f0;background:white;cursor:pointer;font-size:14px;font-weight:600;color:#64748b;transition:all 0.25s;display:flex;align-items:center;gap:8px;}
-        .cat-btn.active{background:linear-gradient(135deg,#0ea5e9,#10b981);color:white;border-color:transparent;box-shadow:0 4px 20px rgba(14,165,233,0.3);}
-        .cat-btn:hover:not(.active){border-color:#0ea5e9;color:#0ea5e9;}
-        .service-card{background:white;border-radius:20px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,0.06);border:1px solid rgba(14,165,233,0.08);transition:all 0.3s;}
-        .service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(14,165,233,0.14);border-color:rgba(14,165,233,0.2);}
-        .step-card{background:white;border-radius:20px;padding:28px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.06);transition:all 0.3s;}
-        .step-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(14,165,233,0.12);}
-        @media(max-width:768px){.cat-scroll{flex-wrap:nowrap!important;overflow-x:auto;padding-bottom:8px;} .services-grid{grid-template-columns:1fr!important;}}
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .fade-up {
+          opacity: 0;
+          transform: translateY(36px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .gradient-text {
+          background: linear-gradient(135deg,#0ea5e9,#10b981);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .pill-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(16,185,129,0.1);
+          color: #10b981;
+          border: 1px solid rgba(16,185,129,0.25);
+          border-radius: 999px;
+          padding: 6px 16px;
+          font-size: 13px;
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+        .cat-btn {
+          padding: 10px 20px;
+          border-radius: 999px;
+          border: 2px solid #e2e8f0;
+          background: white;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          color: #64748b;
+          transition: all 0.25s;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          white-space: nowrap;
+        }
+        .cat-btn.active {
+          background: linear-gradient(135deg,#0ea5e9,#10b981);
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+        }
+        .cat-btn:hover:not(.active) {
+          border-color: #0ea5e9;
+          color: #0ea5e9;
+        }
+        .service-card {
+          background: white;
+          border-radius: 20px;
+          padding: 24px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+          border: 1px solid rgba(14,165,233,0.08);
+          transition: all 0.3s;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        .service-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 40px rgba(14,165,233,0.14);
+          border-color: rgba(14,165,233,0.2);
+        }
+        .step-card {
+          background: white;
+          border-radius: 20px;
+          padding: 24px 20px;
+          text-align: center;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+          transition: all 0.3s;
+          height: 100%;
+        }
+        .step-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 16px 40px rgba(14,165,233,0.12);
+        }
+        .cat-scroll {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 52px;
+        }
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 24px;
+        }
+        .steps-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+        }
+        .cta-buttons {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        @media (max-width: 992px) {
+          .steps-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
+          .service-card {
+            padding: 20px;
+          }
+          .cat-btn {
+            padding: 8px 18px;
+            font-size: 13px;
+          }
+        }
+        @media (max-width: 768px) {
+          .cat-scroll {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding-bottom: 12px;
+            margin-bottom: 40px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+          }
+          .cat-scroll::-webkit-scrollbar {
+            height: 4px;
+          }
+          .cat-scroll::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 4px;
+          }
+          .cat-scroll::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+          }
+          .services-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .steps-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          .step-card {
+            padding: 20px;
+          }
+          .service-card {
+            padding: 20px;
+          }
+          .pill-badge {
+            font-size: 12px;
+            padding: 5px 14px;
+          }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+          }
+          .cta-buttons button {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            justify-content: center;
+          }
+        }
+        @media (max-width: 480px) {
+          .cat-btn {
+            padding: 6px 14px;
+            font-size: 12px;
+            gap: 4px;
+          }
+          .service-card h3 {
+            font-size: 16px;
+          }
+          .service-card p {
+            font-size: 13px;
+          }
+          .step-card h3 {
+            font-size: 15px;
+          }
+          .step-card p {
+            font-size: 12px;
+          }
+          .pill-badge {
+            font-size: 11px;
+            padding: 4px 12px;
+          }
+        }
       `}</style>
 
       {/* HERO */}
-      <section style={{ background: 'linear-gradient(145deg,#f0fdf9,#e8f4fd)', padding: '140px 24px 80px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: -80, right: -80, width: 350, height: 350, background: '#0ea5e9', borderRadius: '50%', filter: 'blur(90px)', opacity: 0.1 }} />
-        <div ref={heroRef} style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative' }}>
-          <div className={`pill-badge fade-up ${heroInView ? 'visible' : ''}`} style={{ justifyContent: 'center' }}><span>✦</span> Our Services</div>
-          <h1 className={`fade-up ${heroInView ? 'visible' : ''}`} style={{ fontFamily: "'Playfair Display',serif", fontSize: 'clamp(32px,4vw,56px)', fontWeight: 800, color: '#0f172a', lineHeight: 1.15, marginBottom: 20, transitionDelay: '0.1s' }}>
+      <section style={{ 
+        background: 'linear-gradient(145deg,#f0fdf9,#e8f4fd)', 
+        padding: 'clamp(100px, 15vw, 140px) clamp(16px, 5vw, 24px) clamp(60px, 8vw, 80px)', 
+        position: 'relative', 
+        overflow: 'hidden' 
+      }}>
+        <div style={{ 
+          position: 'absolute', 
+          top: -80, 
+          right: -80, 
+          width: 'clamp(200px, 40vw, 350px)', 
+          height: 'clamp(200px, 40vw, 350px)', 
+          background: '#0ea5e9', 
+          borderRadius: '50%', 
+          filter: 'blur(90px)', 
+          opacity: 0.1 
+        }} />
+        <div ref={heroRef} style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', position: 'relative', padding: '0 16px' }}>
+          <div className={`pill-badge fade-up ${heroInView ? 'visible' : ''}`} style={{ justifyContent: 'center' }}>
+            <span>✦</span> Our Services
+          </div>
+          <h1 className={`fade-up ${heroInView ? 'visible' : ''}`} style={{ 
+            fontFamily: "'Playfair Display',serif", 
+            fontSize: 'clamp(28px, 6vw, 56px)', 
+            fontWeight: 800, 
+            color: '#0f172a', 
+            lineHeight: 1.2, 
+            marginBottom: 'clamp(16px, 3vw, 20px)', 
+            transitionDelay: '0.1s' 
+          }}>
             Complete Dental & <span className="gradient-text">Facial Care</span>
           </h1>
-          <p className={`fade-up ${heroInView ? 'visible' : ''}`} style={{ color: '#475569', fontSize: 17, lineHeight: 1.75, transitionDelay: '0.2s' }}>
+          <p className={`fade-up ${heroInView ? 'visible' : ''}`} style={{ 
+            color: '#475569', 
+            fontSize: 'clamp(15px, 3vw, 17px)', 
+            lineHeight: 1.6, 
+            transitionDelay: '0.2s' 
+          }}>
             From routine checkups to smile transformations and facial rejuvenation—everything you need, all under one roof.
           </p>
         </div>
       </section>
 
       {/* CATEGORY TABS */}
-      <section ref={servicesRef} style={{ background: 'white', padding: '70px 24px' }}>
+      <section ref={servicesRef} style={{ background: 'white', padding: 'clamp(50px, 8vw, 70px) clamp(16px, 5vw, 24px)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           {/* Category buttons */}
-          <div className="cat-scroll" style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 52, flexWrap: 'wrap' }}>
+          <div className="cat-scroll">
             {categories.map(cat => (
-              <button key={cat.id} className={`cat-btn ${activeCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat.id)}>
+              <button 
+                key={cat.id} 
+                className={`cat-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
+              >
                 <span>{cat.icon}</span>{cat.label}
               </button>
             ))}
           </div>
 
           {/* Services Grid */}
-          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 24 }}>
+          <div className="services-grid">
             {current.services.map((s, i) => (
-              <div key={s.title} className={`service-card fade-up ${servicesInView ? 'visible' : ''}`} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-                  <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0f172a', lineHeight: 1.3, flex: 1 }}>{s.title}</h3>
+              <div 
+                key={s.title} 
+                className={`service-card fade-up ${servicesInView ? 'visible' : ''}`} 
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div style={{ marginBottom: 16 }}>
+                  <h3 style={{ 
+                    fontSize: 'clamp(16px, 4vw, 18px)', 
+                    fontWeight: 700, 
+                    color: '#0f172a', 
+                    lineHeight: 1.3 
+                  }}>
+                    {s.title}
+                  </h3>
                 </div>
-                <p style={{ color: '#64748b', fontSize: 14, lineHeight: 1.65, marginBottom: 20 }}>{s.desc}</p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <div style={{ background: 'linear-gradient(135deg,#f0fdf9,#e8f4fd)', borderRadius: 10, padding: '6px 14px', fontSize: 13, fontWeight: 600, color: '#0ea5e9' }}>💰 {s.price}</div>
-                  <div style={{ background: '#f8fafc', borderRadius: 10, padding: '6px 14px', fontSize: 13, fontWeight: 600, color: '#64748b' }}>⏱ {s.duration}</div>
+                <p style={{ 
+                  color: '#64748b', 
+                  fontSize: 'clamp(13px, 3vw, 14px)', 
+                  lineHeight: 1.6, 
+                  marginBottom: 20,
+                  flex: 1
+                }}>
+                  {s.desc}
+                </p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
+                  <div style={{ 
+                    background: 'linear-gradient(135deg,#f0fdf9,#e8f4fd)', 
+                    borderRadius: 10, 
+                    padding: '6px 14px', 
+                    fontSize: 'clamp(12px, 2.5vw, 13px)', 
+                    fontWeight: 600, 
+                    color: '#0ea5e9' 
+                  }}>
+                    💰 {s.price}
+                  </div>
+                  <div style={{ 
+                    background: '#f8fafc', 
+                    borderRadius: 10, 
+                    padding: '6px 14px', 
+                    fontSize: 'clamp(12px, 2.5vw, 13px)', 
+                    fontWeight: 600, 
+                    color: '#64748b' 
+                  }}>
+                    ⏱ {s.duration}
+                  </div>
                 </div>
-                <button style={{ marginTop: 20, width: '100%', background: 'linear-gradient(135deg,#0ea5e9,#10b981)', color: 'white', border: 'none', borderRadius: 12, padding: '11px 0', fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'opacity 0.2s' }}
+                <button 
+                  style={{ 
+                    marginTop: 'auto', 
+                    width: '100%', 
+                    background: 'linear-gradient(135deg,#0ea5e9,#10b981)', 
+                    color: 'white', 
+                    border: 'none', 
+                    borderRadius: 12, 
+                    padding: 'clamp(10px, 3vw, 12px) 0', 
+                    fontSize: 'clamp(13px, 3vw, 14px)', 
+                    fontWeight: 600, 
+                    cursor: 'pointer', 
+                    transition: 'opacity 0.2s' 
+                  }}
                   onMouseOver={e => e.target.style.opacity = '0.9'}
-                  onMouseOut={e => e.target.style.opacity = '1'}>
+                  onMouseOut={e => e.target.style.opacity = '1'}
+                >
                   Book This Service
                 </button>
               </div>
@@ -127,26 +396,67 @@ const Services = () => {
       </section>
 
       {/* HOW IT WORKS */}
-      <section ref={processRef} style={{ background: 'linear-gradient(180deg,#f8fafc,#f0fdf9)', padding: '90px 24px' }}>
+      <section ref={processRef} style={{ 
+        background: 'linear-gradient(180deg,#f8fafc,#f0fdf9)', 
+        padding: 'clamp(60px, 10vw, 90px) clamp(16px, 5vw, 24px)' 
+      }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div className="pill-badge" style={{ justifyContent: 'center' }}><span>✦</span> How It Works</div>
-            <h2 className={`fade-up ${processInView ? 'visible' : ''}`} style={{ fontFamily: "'Playfair Display',serif", fontSize: 'clamp(26px,3.5vw,42px)', fontWeight: 800, color: '#0f172a' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 56px)' }}>
+            <div className="pill-badge" style={{ justifyContent: 'center' }}>
+              <span>✦</span> How It Works
+            </div>
+            <h2 className={`fade-up ${processInView ? 'visible' : ''}`} style={{ 
+              fontFamily: "'Playfair Display',serif", 
+              fontSize: 'clamp(24px, 5vw, 42px)', 
+              fontWeight: 800, 
+              color: '#0f172a' 
+            }}>
               Your Path to a <span className="gradient-text">Perfect Smile</span>
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', gap: 24 }}>
+          <div className="steps-grid">
             {[
               ['1', '📅', 'Book Appointment', 'Call us, WhatsApp, or use our online booking system.'],
               ['2', '🔍', 'Consultation', 'A thorough exam and personalized treatment plan.'],
               ['3', '💎', 'Treatment', 'Expert care with the latest technology for best results.'],
               ['4', '😊', 'Aftercare', 'Follow-up visits and guidance to keep your smile perfect.'],
             ].map(([step, icon, title, desc], i) => (
-              <div key={title} className={`step-card fade-up ${processInView ? 'visible' : ''}`} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div style={{ width: 48, height: 48, background: 'linear-gradient(135deg,#0ea5e9,#10b981)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: 18, margin: '0 auto 16px' }}>{step}</div>
-                <div style={{ fontSize: 32, marginBottom: 12 }}>{icon}</div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{title}</h3>
-                <p style={{ color: '#64748b', fontSize: 13, lineHeight: 1.6 }}>{desc}</p>
+              <div 
+                key={title} 
+                className={`step-card fade-up ${processInView ? 'visible' : ''}`} 
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div style={{ 
+                  width: 'clamp(44px, 8vw, 48px)', 
+                  height: 'clamp(44px, 8vw, 48px)', 
+                  background: 'linear-gradient(135deg,#0ea5e9,#10b981)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  color: 'white', 
+                  fontWeight: 800, 
+                  fontSize: 'clamp(16px, 4vw, 18px)', 
+                  margin: '0 auto 16px' 
+                }}>
+                  {step}
+                </div>
+                <div style={{ fontSize: 'clamp(28px, 8vw, 32px)', marginBottom: 12 }}>{icon}</div>
+                <h3 style={{ 
+                  fontSize: 'clamp(15px, 3.5vw, 16px)', 
+                  fontWeight: 700, 
+                  color: '#0f172a', 
+                  marginBottom: 8 
+                }}>
+                  {title}
+                </h3>
+                <p style={{ 
+                  color: '#64748b', 
+                  fontSize: 'clamp(12px, 2.5vw, 13px)', 
+                  lineHeight: 1.6 
+                }}>
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
@@ -154,17 +464,73 @@ const Services = () => {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg,#0f172a,#1e293b)', padding: '80px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: -60, left: '30%', width: 300, height: 300, background: '#0ea5e9', borderRadius: '50%', filter: 'blur(100px)', opacity: 0.07 }} />
-        <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 'clamp(26px,3.5vw,40px)', fontWeight: 800, color: 'white', marginBottom: 14, position: 'relative' }}>
+      <section style={{ 
+        background: 'linear-gradient(135deg,#0f172a,#1e293b)', 
+        padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)', 
+        textAlign: 'center', 
+        position: 'relative', 
+        overflow: 'hidden' 
+      }}>
+        <div style={{ 
+          position: 'absolute', 
+          top: -60, 
+          left: '30%', 
+          width: 'clamp(200px, 40vw, 300px)', 
+          height: 'clamp(200px, 40vw, 300px)', 
+          background: '#0ea5e9', 
+          borderRadius: '50%', 
+          filter: 'blur(100px)', 
+          opacity: 0.07 
+        }} />
+        <h2 style={{ 
+          fontFamily: "'Playfair Display',serif", 
+          fontSize: 'clamp(24px, 5vw, 40px)', 
+          fontWeight: 800, 
+          color: 'white', 
+          marginBottom: 'clamp(12px, 2vw, 14px)', 
+          position: 'relative' 
+        }}>
           Not Sure Which Service You Need?
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: 16, marginBottom: 36 }}>Book a free consultation and our experts will guide you to the right treatment.</p>
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={{ background: 'linear-gradient(135deg,#0ea5e9,#10b981)', color: 'white', border: 'none', borderRadius: 999, padding: '14px 32px', fontSize: 15, fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 20px rgba(14,165,233,0.3)' }}>
+        <p style={{ 
+          color: '#94a3b8', 
+          fontSize: 'clamp(14px, 3vw, 16px)', 
+          marginBottom: 'clamp(28px, 5vw, 36px)' 
+        }}>
+          Book a free consultation and our experts will guide you to the right treatment.
+        </p>
+        <div className="cta-buttons">
+          <button style={{ 
+            background: 'linear-gradient(135deg,#0ea5e9,#10b981)', 
+            color: 'white', 
+            border: 'none', 
+            borderRadius: 999, 
+            padding: 'clamp(12px, 3vw, 14px) clamp(24px, 5vw, 32px)', 
+            fontSize: 'clamp(14px, 3vw, 15px)', 
+            fontWeight: 700, 
+            cursor: 'pointer', 
+            boxShadow: '0 4px 20px rgba(14,165,233,0.3)',
+            transition: 'transform 0.2s, opacity 0.2s'
+          }}
+          onMouseOver={e => { e.target.style.transform = 'scale(1.02)'; e.target.style.opacity = '0.95'; }}
+          onMouseOut={e => { e.target.style.transform = 'scale(1)'; e.target.style.opacity = '1'; }}
+          >
             📅 Free Consultation
           </button>
-          <button style={{ background: 'rgba(255,255,255,0.08)', color: 'white', border: '2px solid rgba(255,255,255,0.2)', borderRadius: 999, padding: '14px 32px', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
+          <button style={{ 
+            background: 'rgba(255,255,255,0.08)', 
+            color: 'white', 
+            border: '2px solid rgba(255,255,255,0.2)', 
+            borderRadius: 999, 
+            padding: 'clamp(12px, 3vw, 14px) clamp(24px, 5vw, 32px)', 
+            fontSize: 'clamp(14px, 3vw, 15px)', 
+            fontWeight: 700, 
+            cursor: 'pointer',
+            transition: 'background 0.2s'
+          }}
+          onMouseOver={e => e.target.style.background = 'rgba(255,255,255,0.15)'}
+          onMouseOut={e => e.target.style.background = 'rgba(255,255,255,0.08)'}
+          >
             📞 Call Now
           </button>
         </div>

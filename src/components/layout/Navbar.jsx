@@ -210,7 +210,9 @@ const Navbar = () => {
         
         <div className="p-5 border-t border-slate-100 bg-white">
           <a
-            href="https://wa.me/9825823946"
+              href="https://wa.me/9779815813946"
+              target="_blank"
+              rel="noopener noreferrer"
             className="bg-gradient-to-r from-[#10b981] to-[#0ea5e9] text-white border-none rounded-full py-3.5 px-5 text-sm font-bold cursor-pointer flex items-center justify-center gap-2 no-underline transition-all duration-250 w-full font-['DM_Sans'] shadow-[0_4px_12px_rgba(16,185,129,0.3)] active:scale-[0.98]"
             onClick={() => setIsOpen(false)}
           >
