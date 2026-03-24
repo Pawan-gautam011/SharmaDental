@@ -15,10 +15,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer style={{ background: 'linear-gradient(145deg,#0a1628,#0f172a)', color: 'white', fontFamily: "'DM Sans',sans-serif" }}>
+    <footer style={{ background: 'linear-gradient(145deg, #f0fdf9 0%, #e0f7fa 40%, #e8f4fd 100%)', color: 'white', fontFamily: "'DM Sans',sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
-        .footer-link { color:#94a3b8; font-size:14px; text-decoration:none; transition:color 0.2s; display:block; padding:3px 0; }
+        .footer-link { color:#000000; font-size:14px; text-decoration:none; transition:color 0.2s; display:block; padding:3px 0; }
         .footer-link:hover { color:#10b981; }
         .social-btn { width:40px; height:40px; background:rgba(255,255,255,0.06); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; transition:all 0.25s; border:1px solid rgba(255,255,255,0.1); text-decoration:none; }
         .social-btn:hover { background:linear-gradient(135deg,#0ea5e9,#10b981); border-color:transparent; transform:translateY(-3px); }
@@ -42,7 +42,7 @@ const Footer = () => {
                 <div style={{ fontSize: 10, color: '#64748b' }}>Oral Care & Face Clinic</div>
               </div>
             </div>
-            <p style={{ color: '#94a3b8', fontSize: 14, lineHeight: 1.75, marginBottom: 24, maxWidth: 260 }}>
+            <p style={{ color: '#000000', fontSize: 14, lineHeight: 1.75, marginBottom: 24, maxWidth: 260 }}>
               Providing exceptional dental and facial care with modern technology and genuine compassion since 2008.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -54,7 +54,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'white', marginBottom: 20, letterSpacing: '0.3px' }}>Quick Links</h4>
+                <h4 style={{ fontSize: 15, fontWeight: 700, color: 'black', marginBottom: 20, letterSpacing: '0.3px' }}>Quick Links</h4>
             {quickLinks.map(link => (
               <Link key={link.name} to={link.path} className="footer-link">{link.name}</Link>
             ))}
@@ -62,25 +62,25 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'white', marginBottom: 20 }}>Our Services</h4>
+            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'black', marginBottom: 20 }}>Our Services</h4>
             {services.map(s => (
-              <Link key={s} to="/services" className="footer-link">{s}</Link>
+              <Link key={s} to="/services" className="footer-link  ">{s}</Link>
             ))}
           </div>
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'white', marginBottom: 20 }}>Get In Touch</h4>
+            <h4 style={{ fontSize: 15, fontWeight: 700, color: 'black', marginBottom: 20 }}>Get In Touch</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                ['📍', '123 Dental Street, City\nState 123456'],
-                ['📞', '+91 98765 43210'],
+                ['📍', '123 Bardibas Road'],
+                ['📞', '+977 9864152876'],
                 ['📧', 'info@sharmadental.com'],
-                ['🕐', 'Mon–Sat: 9am–8pm\nSun: By Appointment'],
+                ['🕐', 'Sun–Sat: 9am–8pm'],
               ].map(([icon, text]) => (
                 <div key={text} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <span style={{ fontSize: 16, marginTop: 1, flexShrink: 0 }}>{icon}</span>
-                  <span style={{ color: '#94a3b8', fontSize: 13, lineHeight: 1.65 }}>{text.split('\n').map((t, i) => <span key={i}>{t}{i === 0 && text.includes('\n') ? <br /> : ''}</span>)}</span>
+                  <span style={{ color: '#000000', fontSize: 13, lineHeight: 1.65 }}>{text.split('\n').map((t, i) => <span key={i}>{t}{i === 0 && text.includes('\n') ? <br /> : ''}</span>)}</span>
                 </div>
               ))}
             </div>
