@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import treatmentHeroImg from "../../assets/treatment-1.png";
 
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
@@ -269,6 +270,29 @@ export const Home = () => {
           gap: 80px;
           align-items: center;
         }
+        .why-choose-left {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          z-index: 1;
+        }
+        .why-choose-hero-img-wrap {
+          width: 100%;
+          max-width: min(100%, 420px);
+          margin-bottom: clamp(16px, 4vw, 28px);
+        }
+        .why-choose-hero-img-wrap img {
+          width: 100%;
+          height: auto;
+          max-height: clamp(180px, 28vw, 260px);
+          object-fit: cover;
+          object-position: center;
+          border-radius: 16px;
+          display: block;
+          box-shadow:
+            0 16px 40px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
         .features-list {
           display: flex;
           flex-direction: column;
@@ -307,6 +331,15 @@ export const Home = () => {
             grid-template-columns: 1fr;
             gap: 40px;
             text-align: center;
+          }
+          .why-choose-hero-img-wrap {
+            max-width: min(92vw, 360px);
+            margin-left: auto;
+            margin-right: auto;
+            align-self: center;
+          }
+          .why-choose-hero-img-wrap img {
+            max-height: min(220px, 48vw);
           }
           .why-choose-grid .pill-badge {
             margin-left: auto;
@@ -365,6 +398,16 @@ export const Home = () => {
           }
         }
         
+        @media (min-width: 769px) {
+          .why-choose-hero-img-wrap {
+            align-self: flex-start;
+            max-width: 400px;
+          }
+          .why-choose-hero-img-wrap img {
+            max-height: clamp(200px, 22vw, 280px);
+          }
+        }
+
         @media (min-width: 769px) and (max-width: 1024px) {
           .why-choose-grid {
             gap: 40px;
@@ -799,6 +842,18 @@ export const Home = () => {
         </div>
       </section>
 
+      {/* ── Image before Why Choose Us ── */}
+<div className="flex justify-center mb-[-40px] relative z-[2]">
+  <div className="absolute -bottom-24 left-4 w-[120px] sm:w-[150px]">
+    <img
+      src="/src/assets/treatment-1.png"
+      alt="Treatment"
+      className="w-full h-auto"
+    />
+  </div>
+</div>
+
+
       {/* ── WHY CHOOSE US ── */}
       <section
         style={{
@@ -1039,18 +1094,33 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ── CTA with Background Image ── */}
       <section
         ref={ctaRef}
         style={{
-          background: "linear-gradient(135deg,#0ea5e9,#10b981)",
+          backgroundImage: "url('/src/assets/Smile-Banner.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
           padding: "clamp(60px, 10vw, 80px) 20px",
           textAlign: "center",
         }}
       >
+        {/* Overlay for low transparency */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(135deg, rgba(14,165,233,0.85), rgba(16,185,129,0.85))",
+            zIndex: 1,
+          }}
+        />
         <div
           className={`fade-up ${ctaInView ? "visible" : ""}`}
-          style={{ maxWidth: 600, margin: "0 auto", padding: "0 16px" }}
+          style={{ maxWidth: 600, margin: "0 auto", padding: "0 16px", position: "relative", zIndex: 2 }}
         >
           <h2
             style={{

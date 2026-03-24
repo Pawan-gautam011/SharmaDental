@@ -59,11 +59,32 @@ const Contact = () => {
         .info-card{background:white;border-radius:20px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:18px;border:1px solid rgba(14,165,233,0.08);transition:all 0.3s;}
         .info-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(14,165,233,0.12);}
         .faq-item{background:white;border-radius:16px;border:1px solid rgba(14,165,233,0.1);overflow:hidden;transition:all 0.3s;}
-        @media(max-width:768px){.contact-grid{flex-direction:column!important;}}
+        @media(max-width:992px){
+          .contact-grid{gap:32px !important;}
+          .form-container{padding:32px 24px !important;}
+        }
+        @media(max-width:768px){
+          .contact-grid{flex-direction:column !important;}
+          .hero-section{padding:100px 20px 60px !important;}
+          .form-container{padding:28px 20px !important;}
+          .form-two-col{grid-template-columns:1fr !important; gap:12px !important;}
+          .form-row{grid-template-columns:1fr !important; gap:12px !important;}
+          .info-sidebar{max-width:500px; margin:0 auto; width:100%;}
+          .map-placeholder{height:200px !important;}
+          .faq-section{padding:60px 20px !important;}
+        }
+        @media(max-width:480px){
+          .pill-badge{font-size:12px; padding:4px 12px;}
+          .form-input{padding:12px 14px; font-size:14px;}
+          .form-container{padding:24px 16px !important;}
+          .info-card{padding:20px;}
+          .quick-contact-card{padding:20px !important;}
+        }
       `}</style>
 
       {/* HERO */}
       <section
+        className="hero-section"
         style={{
           background: "linear-gradient(145deg,#f0fdf9,#e8f4fd)",
           padding: "140px 24px 80px",
@@ -104,6 +125,7 @@ const Contact = () => {
             margin: "0 auto",
             textAlign: "center",
             position: "relative",
+            padding: "0 16px",
           }}
         >
           <div
@@ -130,9 +152,11 @@ const Contact = () => {
             className={`fade-up ${heroInView ? "visible" : ""}`}
             style={{
               color: "#475569",
-              fontSize: 17,
+              fontSize: "clamp(15px, 2vw, 17px)",
               lineHeight: 1.75,
               transitionDelay: "0.2s",
+              maxWidth: "90%",
+              margin: "0 auto",
             }}
           >
             Whether you have questions, want to book an appointment, or just
@@ -141,14 +165,12 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* CONTACT INFO CARDS */}
-  
       {/* FORM + MAP */}
       <section
         ref={formRef}
         style={{ background: "white", padding: "60px 24px 90px" }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}>
           <div
             className="contact-grid"
             style={{ display: "flex", gap: 48, alignItems: "flex-start" }}
@@ -156,9 +178,10 @@ const Contact = () => {
             {/* Form */}
             <div
               className={`fade-left ${formInView ? "visible" : ""}`}
-              style={{ flex: 1.2 }}
+              style={{ flex: 1.2, minWidth: 0 }}
             >
               <div
+                className="form-container"
                 style={{
                   background: "linear-gradient(135deg,#f8fafc,#f0fdf9)",
                   borderRadius: 28,
@@ -170,7 +193,7 @@ const Contact = () => {
                 <h2
                   style={{
                     fontFamily: "'Playfair Display',serif",
-                    fontSize: 28,
+                    fontSize: "clamp(24px, 3vw, 28px)",
                     fontWeight: 800,
                     color: "#0f172a",
                     marginBottom: 8,
@@ -188,7 +211,7 @@ const Contact = () => {
                     <h3
                       style={{
                         fontFamily: "'Playfair Display',serif",
-                        fontSize: 24,
+                        fontSize: "clamp(22px, 3vw, 24px)",
                         fontWeight: 800,
                         color: "#0f172a",
                         marginBottom: 10,
@@ -220,6 +243,7 @@ const Contact = () => {
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <div
+                      className="form-two-col"
                       style={{
                         display: "grid",
                         gridTemplateColumns: "1fr 1fr",
@@ -292,6 +316,7 @@ const Contact = () => {
                       />
                     </div>
                     <div
+                      className="form-row"
                       style={{
                         display: "grid",
                         gridTemplateColumns: "1fr 1fr",
@@ -397,197 +422,209 @@ const Contact = () => {
             </div>
 
             {/* Info sidebar */}
+          <div
+  className={`fade-right ${formInView ? "visible" : ""} info-sidebar`}
+  style={{ 
+    flex: 0.8, 
+    transitionDelay: "0.15s", 
+    minWidth: 0,
+    margin: "0 auto",
+    width: "100%"
+  }}
+>
+  {/* Map placeholder */}
+  <div
+    className="map-placeholder"
+    style={{
+      background: "linear-gradient(135deg,#e0f7fa,#e8f4fd)",
+      borderRadius: 24,
+      height: "auto",
+      minHeight: 220,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 24,
+      position: "relative",
+      overflow: "hidden",
+      padding: "20px",
+    }}
+  >
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background:
+          "linear-gradient(135deg,rgba(14,165,233,0.1),rgba(16,185,129,0.1))",
+      }}
+    />
+    <div style={{ textAlign: "center", position: "relative" }}>
+      <div style={{ fontSize: 48, marginBottom: 8 }}>📍</div>
+      <div
+        style={{ fontWeight: 700, color: "#0f172a", fontSize: 15 }}
+      >
+        123 Dental Street
+      </div>
+      <div style={{ color: "#64748b", fontSize: 13 }}>
+        City, State 123456
+      </div>
+      <button
+        style={{
+          marginTop: 12,
+          background: "linear-gradient(135deg,#0ea5e9,#10b981)",
+          color: "white",
+          border: "none",
+          borderRadius: 999,
+          padding: "8px 18px",
+          fontSize: 12,
+          fontWeight: 600,
+          cursor: "pointer",
+        }}
+      >
+        Get Directions
+      </button>
+    </div>
+  </div>
+
+  {/* Quick contact */}
+  <div
+    className="quick-contact-card"
+    style={{
+      background: "linear-gradient(135deg,#0f172a,#1e293b)",
+      borderRadius: 24,
+      padding: "28px 24px",
+      marginBottom: 24,
+    }}
+  >
+    <h3
+      style={{
+        color: "white",
+        fontWeight: 700,
+        fontSize: 16,
+        marginBottom: 18,
+      }}
+    >
+      Quick Contact
+    </h3>
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 12 }}
+    >
+      {[
+        ["📱", "WhatsApp", "+91 98765 43210", "#25D366"],
+        ["📞", "Call", "+91 98765 43210", "#0ea5e9"],
+        ["📧", "Email", "info@sharmadental.com", "#10b981"],
+      ].map(([icon, label, val, color]) => (
+        <div
+          key={label}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            background: "rgba(255,255,255,0.05)",
+            borderRadius: 12,
+            padding: "12px 16px",
+            cursor: "pointer",
+            border: "1px solid rgba(255,255,255,0.08)",
+            transition: "all 0.2s",
+          }}
+        >
+          <div
+            style={{
+              width: 36,
+              height: 36,
+              background: `${color}20`,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 16,
+            }}
+          >
+            {icon}
+          </div>
+          <div>
             <div
-              className={`fade-right ${formInView ? "visible" : ""}`}
-              style={{ flex: 0.8, transitionDelay: "0.15s" }}
+              style={{
+                color: "#94a3b8",
+                fontSize: 11,
+                fontWeight: 600,
+              }}
             >
-              {/* Map placeholder */}
-              <div
-                style={{
-                  background: "linear-gradient(135deg,#e0f7fa,#e8f4fd)",
-                  borderRadius: 24,
-                  height: 220,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 24,
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(135deg,rgba(14,165,233,0.1),rgba(16,185,129,0.1))",
-                  }}
-                />
-                <div style={{ textAlign: "center", position: "relative" }}>
-                  <div style={{ fontSize: 48, marginBottom: 8 }}>📍</div>
-                  <div
-                    style={{ fontWeight: 700, color: "#0f172a", fontSize: 15 }}
-                  >
-                    123 Dental Street
-                  </div>
-                  <div style={{ color: "#64748b", fontSize: 13 }}>
-                    City, State 123456
-                  </div>
-                  <button
-                    style={{
-                      marginTop: 12,
-                      background: "linear-gradient(135deg,#0ea5e9,#10b981)",
-                      color: "white",
-                      border: "none",
-                      borderRadius: 999,
-                      padding: "8px 18px",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      cursor: "pointer",
-                    }}
-                  >
-                    Get Directions
-                  </button>
-                </div>
-              </div>
-
-              {/* Quick contact */}
-              <div
-                style={{
-                  background: "linear-gradient(135deg,#0f172a,#1e293b)",
-                  borderRadius: 24,
-                  padding: "28px 24px",
-                  marginBottom: 24,
-                }}
-              >
-                <h3
-                  style={{
-                    color: "white",
-                    fontWeight: 700,
-                    fontSize: 16,
-                    marginBottom: 18,
-                  }}
-                >
-                  Quick Contact
-                </h3>
-                <div
-                  style={{ display: "flex", flexDirection: "column", gap: 12 }}
-                >
-                  {[
-                    ["📱", "WhatsApp", "+91 98765 43210", "#25D366"],
-                    ["📞", "Call", "+91 98765 43210", "#0ea5e9"],
-                    ["📧", "Email", "info@sharmadental.com", "#10b981"],
-                  ].map(([icon, label, val, color]) => (
-                    <div
-                      key={label}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 12,
-                        background: "rgba(255,255,255,0.05)",
-                        borderRadius: 12,
-                        padding: "12px 16px",
-                        cursor: "pointer",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                        transition: "all 0.2s",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 36,
-                          height: 36,
-                          background: `${color}20`,
-                          borderRadius: "50%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 16,
-                        }}
-                      >
-                        {icon}
-                      </div>
-                      <div>
-                        <div
-                          style={{
-                            color: "#94a3b8",
-                            fontSize: 11,
-                            fontWeight: 600,
-                          }}
-                        >
-                          {label}
-                        </div>
-                        <div
-                          style={{
-                            color: "white",
-                            fontSize: 13,
-                            fontWeight: 600,
-                          }}
-                        >
-                          {val}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Emergency */}
-              <div
-                style={{
-                  background: "linear-gradient(135deg,#0ea5e9,#10b981)",
-                  borderRadius: 20,
-                  padding: "24px",
-                  textAlign: "center",
-                }}
-              >
-                <div style={{ fontSize: 32, marginBottom: 8 }}>🚨</div>
-                <div
-                  style={{
-                    color: "white",
-                    fontWeight: 700,
-                    fontSize: 15,
-                    marginBottom: 6,
-                  }}
-                >
-                  Dental Emergency?
-                </div>
-                <div
-                  style={{
-                    color: "rgba(255,255,255,0.85)",
-                    fontSize: 13,
-                    marginBottom: 14,
-                  }}
-                >
-                  We offer same-day emergency appointments
-                </div>
-                <button
-                  style={{
-                    background: "white",
-                    color: "#0ea5e9",
-                    border: "none",
-                    borderRadius: 999,
-                    padding: "10px 22px",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    cursor: "pointer",
-                  }}
-                >
-                  Call Emergency Line
-                </button>
-              </div>
+              {label}
             </div>
+            <div
+              style={{
+                color: "white",
+                fontSize: "clamp(12px, 2vw, 13px)",
+                fontWeight: 600,
+                wordBreak: "break-word",
+              }}
+            >
+              {val}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Emergency */}
+  <div
+    style={{
+      background: "linear-gradient(135deg,#0ea5e9,#10b981)",
+      borderRadius: 20,
+      padding: "24px",
+      textAlign: "center",
+    }}
+  >
+    <div style={{ fontSize: 32, marginBottom: 8 }}>🚨</div>
+    <div
+      style={{
+        color: "white",
+        fontWeight: 700,
+        fontSize: "clamp(14px, 2vw, 15px)",
+        marginBottom: 6,
+      }}
+    >
+      Dental Emergency?
+    </div>
+    <div
+      style={{
+        color: "rgba(255,255,255,0.85)",
+        fontSize: "clamp(12px, 2vw, 13px)",
+        marginBottom: 14,
+      }}
+    >
+      We offer same-day emergency appointments
+    </div>
+    <button
+      style={{
+        background: "white",
+        color: "#0ea5e9",
+        border: "none",
+        borderRadius: 999,
+        padding: "10px 22px",
+        fontSize: 13,
+        fontWeight: 700,
+        cursor: "pointer",
+      }}
+    >
+      Call Emergency Line
+    </button>
+  </div>
+</div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section
+        className="faq-section"
         style={{
           background: "linear-gradient(180deg,#f8fafc,#f0fdf9)",
           padding: "80px 24px",
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 16px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div className="pill-badge" style={{ justifyContent: "center" }}>
               <span>✦</span> FAQ
@@ -650,7 +687,7 @@ const FAQItem = ({ question, answer }) => {
           width: "100%",
           background: "none",
           border: "none",
-          padding: "20px 24px",
+          padding: "clamp(16px, 2vw, 20px) clamp(20px, 3vw, 24px)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -662,16 +699,17 @@ const FAQItem = ({ question, answer }) => {
         <span
           style={{
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "clamp(14px, 2vw, 15px)",
             color: "#0f172a",
             lineHeight: 1.4,
+            flex: 1,
           }}
         >
           {question}
         </span>
         <span
           style={{
-            fontSize: 20,
+            fontSize: "clamp(18px, 3vw, 20px)",
             color: "#0ea5e9",
             transition: "transform 0.3s",
             transform: open ? "rotate(45deg)" : "none",
@@ -686,7 +724,7 @@ const FAQItem = ({ question, answer }) => {
           style={{
             padding: "0 24px 20px",
             color: "#64748b",
-            fontSize: 14,
+            fontSize: "clamp(13px, 2vw, 14px)",
             lineHeight: 1.7,
           }}
         >
